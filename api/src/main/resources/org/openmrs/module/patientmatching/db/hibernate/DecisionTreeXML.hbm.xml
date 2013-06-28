@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="org.openmrs.module.patientmatching">
+  
+  <class name="org.openmrs.module.patientmatching.DecisionTreeXML" table="decisiontree">
+    <id name="decisionTreeXMLId" column="decisiontree_id" unsaved-value="0">
+      <generator class="identity"/>
+    </id>
+    <discriminator column="decisiontree_id" insert="false"/>
+    <property name="decisionTreeXML" column="decisiontree_xml" not-null="true"/>
+  </class>
+
+</hibernate-mapping>

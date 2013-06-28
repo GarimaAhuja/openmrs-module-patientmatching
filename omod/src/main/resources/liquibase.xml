@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+  <!--
+See http://www.liquibase.org/manual/home#available_database_refactorings
+for a list of supported elements and attributes
+-->
+  <changeSet id="1-decisiontree" author="garima">
+    <comment>
+  	Create decisiontree table to store decision trees. The purpose of these decision trees is to decide whether or not an attribute is suited for patient matching.
+    </comment>
+    <createTable tableName="decisiontree">
+      <column name="decisiontree_id" type="int" autoIncrement="true">
+        <constraints primaryKey="true" nullable="false"/>
+      </column>
+      <column name="decisiontree_xml" type="text">
+        <constraints nullable="false"/>
+      </column>
+    </createTable>
+  </changeSet>
+</databaseChangeLog>
