@@ -48,7 +48,7 @@ public class DecisionTreeXML implements Comparable<DecisionTreeXML>{
 	  * Set the decisionTreeXML
 	  * @param the decisionTreeXML to set
 	  */
-	public void setdecisionTreeXML(String decisionTreeXMLId) {
+	public void setdecisionTreeXML(String decisionTreeXML) {
 		this.decisionTreeXML = decisionTreeXML;
 	}
 
