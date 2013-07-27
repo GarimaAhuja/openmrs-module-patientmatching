@@ -14,7 +14,7 @@ import org.openmrs.module.patientmatching.db.DecisionTreeXMLMetadataDao;
 import org.openmrs.module.patientmatching.db.hibernate.HibernateDecisionTreeXMLMetadataDAO;
 import org.openmrs.module.patientmatching.DecisionTreeXML;
 
-public abstract class CRUDServlet extends HttpServlet {
+public class CRUDServlet extends HttpServlet {
 
 	private Log log = LogFactory.getLog(CRUDServlet.class);
 
