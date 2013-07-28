@@ -22,6 +22,9 @@ public class CRUDServlet extends HttpServlet {
 	{
 		try
 		{
+			response.setHeader("Content-Type", "text");
+			response.getOutputStream().println(" Done generating 'return data' sql file. ");
+			
 			DecisionTreeXMLMetadataDao dtxmd = new HibernateDecisionTreeXMLMetadataDAO();		
 
 			DecisionTreeXML dtx = new DecisionTreeXML();
