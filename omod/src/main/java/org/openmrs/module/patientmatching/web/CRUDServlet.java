@@ -16,7 +16,7 @@ import org.openmrs.module.patientmatching.DecisionTreeXML;
 
 public class CRUDServlet extends HttpServlet {
 
-	private Log log = LogFactory.getLog(CRUDServlet.class);
+	private Log log = LogFactory.getLog(getClass());
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
@@ -36,4 +36,10 @@ public class CRUDServlet extends HttpServlet {
 			log.error(e);
 		}
 	}
+
+	@Override
+		protected void doPost(HttpServletRequest request, HttpServletResponse response)	throws ServletException, IOException 
+		{
+			doGet(request, response);
+		}
 }
