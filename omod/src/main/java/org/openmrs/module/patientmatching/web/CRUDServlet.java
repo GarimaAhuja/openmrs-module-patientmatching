@@ -20,11 +20,10 @@ public class CRUDServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
+		response.setHeader("Content-Type", "text");
+		response.getOutputStream().println(" Done generating 'return data' sql file. ");
 		try
-		{
-			response.setHeader("Content-Type", "text");
-			response.getOutputStream().println(" Done generating 'return data' sql file. ");
-			
+		{			
 			DecisionTreeXMLMetadataDao dtxmd = new HibernateDecisionTreeXMLMetadataDAO();		
 
 			DecisionTreeXML dtx = new DecisionTreeXML();
