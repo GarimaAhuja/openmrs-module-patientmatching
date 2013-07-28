@@ -1,6 +1,7 @@
 package org.openmrs.module.patientmatching.web;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -18,30 +19,22 @@ public class CRUDServlet extends HttpServlet {
 
 	private Log log = LogFactory.getLog(getClass());
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		response.setHeader("Content-Type", "text");
-		response.getOutputStream().println(" Done generating 'return data' sql file. ");
-		try
-		{			
-			DecisionTreeXMLMetadataDao dtxmd = new HibernateDecisionTreeXMLMetadataDAO();		
+		// Set response content type
+		response.setContentType("text/html");
 
-			DecisionTreeXML dtx = new DecisionTreeXML();
-			DecisionTreeXML returndtx = new DecisionTreeXML();
-
-			dtx.setdecisionTreeXMLId(1);
-			dtx.setdecisionTreeXML("Test String");
-			dtxmd.saveDecisionTreeXML(dtx);
-			//returndtx = dtxmd.findDecisionTreeXMLById(1);
-		}
-		catch (Exception e) {
-			log.error(e);
-		}
+		// Actual logic goes here.
+		String message = "Potato naaa Banananan ";
+		PrintWriter out = response.getWriter();
+		out.println("<h1>" + message + "</h1>");
 	}
 
+
 	@Override
-		protected void doPost(HttpServletRequest request, HttpServletResponse response)	throws ServletException, IOException 
+		protected void doPost(HttpServletRequest request, HttpServletResponse response)	throws ServletException, IOException
 		{
 			doGet(request, response);
 		}
+
 }
