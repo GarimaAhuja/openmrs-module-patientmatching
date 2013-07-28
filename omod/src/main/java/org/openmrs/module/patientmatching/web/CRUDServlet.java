@@ -25,6 +25,16 @@ public class CRUDServlet extends HttpServlet {
 		response.setContentType("text/html");
 
 		// Actual logic goes here.
+		DecisionTreeXMLMetadataDao dtxmd = new HibernateDecisionTreeXMLMetadataDAO();		
+
+		DecisionTreeXML dtx = new DecisionTreeXML();
+		DecisionTreeXML returndtx = new DecisionTreeXML();
+
+		dtx.setdecisionTreeXMLId(1);
+		dtx.setdecisionTreeXML("Test String");
+		//dtxmd.saveDecisionTreeXML(dtx);
+		returndtx = dtxmd.findDecisionTreeXMLById(1);
+		
 		String message = "Potato naaa Banananan ";
 		PrintWriter out = response.getWriter();
 		out.println("<h1>" + message + "</h1>");
