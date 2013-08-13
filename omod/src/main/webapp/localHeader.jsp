@@ -23,4 +23,12 @@
             </a>
         </li>
     </openmrs:hasPrivilege>
+    <openmrs:hasPrivilege privilege="View Patients, View Patient Cohorts">
+        <li <c:if test='<%= request.getRequestURI().contains("strategy") %>'>class="active"</c:if>>
+            <a href="${pageContext.request.contextPath}/module/patientmatching/strategy.form">
+                <spring:message code="patientmatching.strategy.view"/>
+            </a>
+        </li>
+    </openmrs:hasPrivilege>
+
 </ul>

@@ -16,6 +16,7 @@
 				<prop key="/module/@MODULE_ID@/dupes.list">matchDupes</prop>
 				<prop key="/module/@MODULE_ID@/report.form">reportDupes</prop>
 				<prop key="/module/@MODULE_ID@/metadata.form">reportMetadata</prop>
+				<prop key="/module/@MODULE_ID@/strategy.form">strategyForm</prop>
 			</props>
 		</property>
 	</bean>
@@ -34,12 +35,18 @@
 			<value>redirect:/module/@MODULE_ID@/config.list</value>
 		</property>
 	</bean>
-	<bean id="matchConfig"
-		class="@MODULE_PACKAGE@.web.ConfigurationListSimpleFormController">
+	<bean id="matchConfig" class="@MODULE_PACKAGE@.web.ConfigurationListSimpleFormController">
 		<property name="formView">
 			<value>/module/@MODULE_ID@/configList</value>
 		</property>
 	</bean>
+	
+	<bean id="strategyForm"	class="@MODULE_PACKAGE@.web.StrategyFormController">
+		<property name="formView">
+			<value>/module/@MODULE_ID@/strategyForm</value>
+		</property>
+	</bean>
+
 
 	<bean id="matchSchedule" class="@MODULE_PACKAGE@.web.ScheduleSimpleFormController">
 		<property name="formView">

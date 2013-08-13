@@ -23,6 +23,7 @@ public class AdminList extends AdministrationSectionExt {
         map.put("module/patientmatching/config.list", "patientmatching.config.view");
         map.put("module/patientmatching/schedule.list", "patientmatching.schedule.view");
         map.put("module/patientmatching/dupes.list", "patientmatching.report.view");
+        map.put("module/patientmatching/strategy.form", "patientmatching.strategy.view");
 		
 		return map;
 	}
