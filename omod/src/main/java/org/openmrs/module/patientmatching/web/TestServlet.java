@@ -13,6 +13,10 @@ import org.apache.commons.logging.LogFactory;
 
 import org.openmrs.module.patientmatching.db.hibernate.HibernateFieldMetadataDAO;
 import java.util.List;
+import java.util.ArrayList;
+
+import org.openmrs.module.patientmatching.MatchingConfigurationUtils;
+import org.openmrs.module.patientmatching.PatientMatchingConfiguration;
 
 public class TestServlet extends HttpServlet {
 
@@ -30,8 +34,16 @@ public class TestServlet extends HttpServlet {
 		out.println("<h1>" + message + "</h1>");
 
 		List result = hfm.getField("person","person_id");
-		Object elem = result.get(0);
-		out.println("<h1>" + elem + "</h1>");
+		for(int i=0;i<=10;i++)
+		{
+			Object elem = result.get(i);
+			out.println("<h1>" + elem + "</h1>");
+		}
+		
+		List<String> s1= new ArrayList<String>();
+		//PatientMatchingConfiguration pmc = new PatientMatchingConfiguration();
+		//pmc = MatchingConfigurationUtils.createPatientMatchingConfig(s1);
+
 		
 	}
 
