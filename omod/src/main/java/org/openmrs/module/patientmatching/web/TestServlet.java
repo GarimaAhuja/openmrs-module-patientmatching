@@ -34,14 +34,14 @@ public class TestServlet extends HttpServlet {
 		out.println("<h1>" + message + "</h1>");
 
 		List result = hfm.getField("person","person_id");
-		for(int i=0;i<=10;i++)
+		for(int i=0;i<=2;i++)
 		{
 			Object elem = result.get(i);
 			out.println("<h1>" + elem + "</h1>");
 		}
 		
 		List<String> s1= new ArrayList<String>();
-		//PatientMatchingConfiguration pmc = new PatientMatchingConfiguration();
+		PatientMatchingConfiguration pmc = new PatientMatchingConfiguration();
 		//pmc = MatchingConfigurationUtils.createPatientMatchingConfig(s1);
 
 		
