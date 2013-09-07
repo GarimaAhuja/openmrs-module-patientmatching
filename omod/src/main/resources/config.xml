@@ -170,6 +170,10 @@
 				<include method="getEstimatedTimeToRun"/>
 				<include method="getTotalRecords"/>
 			</create>
+			<create creator="new" javascript="DWRStrategyUtilities">
+				<param name="class" value="@MODULE_PACKAGE@.web.dwr.DWRStrategyUtilities"></param>
+				<include method="getAllMatchingFields"/>
+			</create>
 		</allow>
 
 		<signatures>
