@@ -28,6 +28,7 @@ import org.openmrs.module.patientmatching.MatchingConstants;
 import org.openmrs.module.patientmatching.MatchingConfigurationUtils;
 import org.openmrs.module.patientmatching.PatientMatchingConfiguration;
 import org.openmrs.module.patientmatching.ConfigurationEntry;
+import org.openmrs.module.patientmatching.web.dwr.DWRStrategyUtilities;
 
 public class TestServlet extends HttpServlet {
 
@@ -41,44 +42,19 @@ public class TestServlet extends HttpServlet {
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 
-		//create fieldName to tablename+columname map
-		HashMap<String, String> fieldNameToSchemaName = new HashMap<String, String>();
-		fieldNameToSchemaName.put("(Attribute) Birthplace","person_attribute_type:Birthplace");
-		fieldNameToSchemaName.put("(Attribute) Citizenship","person_attribute_type:Citizenship");
-
 		//To get an entire column
-		
-		/*
-		List fieldData = hfm.getField("person","person_id");
-		for(int i=0;i<=fieldData.size();i++)
+		DWRStrategyUtilities dsu = new DWRStrategyUtilities();
+		List<String> fieldNames = dsu.getAllMatchingFields();
+		for(int j=0;j<fieldNames.size();j++)
 		{
-			Object elem = result.get(i);
-			out.println("<h1>" + elem + "</h1>");
-		}*/
-		
-		//To get excluded properties
-		AdministrationService adminService = Context.getAdministrationService();
-		String excludedProperties = adminService.getGlobalProperty(MatchingConstants.CONFIG_EXCLUDE_PROPERTIES);
-		List<String> listExcludedProperties = Arrays.asList(excludedProperties.split(",", -1));
-		log.info("Excluded Properties: " + excludedProperties);
-
-		//To get all fields
-		PatientMatchingConfiguration pmc = new PatientMatchingConfiguration();
-		pmc = MatchingConfigurationUtils.createPatientMatchingConfig(listExcludedProperties);
-		SortedSet<ConfigurationEntry> ss = new TreeSet<ConfigurationEntry>();
-		ss = pmc.getConfigurationEntries();
-		int len = ss.size();
-		String elem;
-		for(int i=0;i<len;i++)
-		{
-			elem =  ss.first().getFieldName();
-			if(fieldNameToSchemaName.containsKey(elem))
-			{
-				elem=fieldNameToSchemaName.get(elem);
-			}
-			out.println("<p>" + elem + "</p>");
-			ss.remove(ss.first());
+			//out.println("<h4>"+ fieldNames.get(j) +"<h4>");
+			List fieldData = dsu.getDataForField(fieldNames.get(j));
+			//for(int i=0;i<fieldData.size();i++)
+				//out.println("<p>"+fieldData.get(i)+"</p>");
 		}
+		List fieldData = dsu.getDataForField("person_attribute:value");
+			for(int i=0;i<fieldData.size();i++)
+				out.println("<p>"+fieldData.get(i)+"</p>");
 	}
 
 

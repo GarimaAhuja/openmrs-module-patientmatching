@@ -23,7 +23,7 @@ public class HibernateFieldMetadataDAO{
 	public HibernateFieldMetadataDAO() {
 	}
 
-	public java.util.List<String> getField(String tableName, String columnName)
+	public java.util.List getField(String tableName, String columnName)
 	{
 		HibernateConnection hc = new HibernateConnection();
 		sessionFactory = hc.getSessionFactory();
@@ -33,5 +33,4 @@ public class HibernateFieldMetadataDAO{
 		session.close();
 		return result;
 	}
-
 }

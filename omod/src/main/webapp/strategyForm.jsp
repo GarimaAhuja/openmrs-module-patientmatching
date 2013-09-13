@@ -11,37 +11,20 @@
 <openmrs:htmlInclude file="/scripts/calendar/calendar.js" />
 
 <h4>Fields for matching:</h4>
-<thead>
-<tr>
-<th>Data</th>
-</tr>
-</thead>
-<tbody id="fields">
-</tbody>
+<table id="fields">
+</table>
 </br>
 
 <script type="text/javascript">
-var v = "Hello";
-document.write(v);
 function handleCallback(fields)
 {
-	alert(fields);
-	var cellFuncs = [
-		  function(data) { return data; },
-	];
-
-	DWRUtil.addRows( "fields",fields, cellFuncs, {
-		rowCreator:function(options) {
-		var row = document.createElement("tr");
-		var index = options.rowIndex;
-		return row;
-		},
-		cellCreator:function(options) {
-		var td = document.createElement("td");
-		return td;
-		},
-		escapeHtml:false
-	});
+	for(var i=0;i<fields.length;i++)
+	{
+		var table=document.getElementById("fields");
+		var row=table.insertRow(i);
+		var cell1=row.insertCell(0);
+		cell1.innerHTML=fields[i];
+	}
 }
 DWRStrategyUtilities.getAllMatchingFields(handleCallback); 
 </script>
