@@ -254,7 +254,8 @@ public class DWRStrategyUtilities {
 		//getting DecisionTrees
 		for(i=0;i<10;i++)
 		{
-			root[i]=predictAdvice.getDecisionTree("./RandomForest/tree"+Integer.toString(i+1)+".xml");
+			String pathToCurrentTree = getClass().getClassLoader().getResource("RandomForest/tree"+Integer.toString(i+1)+".xml").toString();
+			root[i]=predictAdvice.getDecisionTree(pathToCurrentTree);
 		}
 
 		//getting field data from database
@@ -272,7 +273,7 @@ public class DWRStrategyUtilities {
 			{
 				target+=predictAdvice.decideTarget(root[j],fields.get(i));
 			}
-			if(target>=5)
+			if(target>=3)
 			{
 				fields.get(i).setTarget(1);
 				suggestedFields.add(fields.get(i).getFieldName());
