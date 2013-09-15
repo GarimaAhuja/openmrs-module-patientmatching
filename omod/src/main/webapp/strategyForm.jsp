@@ -26,7 +26,7 @@ function handleCallback(fields)
 		cell1.innerHTML=fields[i];
 	}
 }
-DWRStrategyUtilities.getAllMatchingFields(handleCallback); 
+DWRStrategyUtilities.getAllSuggestedFields(handleCallback); 
 </script>
 
 

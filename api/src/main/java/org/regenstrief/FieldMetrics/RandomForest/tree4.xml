@@ -1,0 +1,78 @@
+<node attribute="N" value="80.63">
+	<node attribute="log_pairs" value="12.14">
+		<node attribute="UqVal" value="94.49">
+			<node attribute="log_pairs" value="6.71">
+				<node attribute="Favg" value="0.00">
+					<node attribute="Target" value="0.00">
+					</node>
+					<node attribute="Target" value="1.00">
+					</node>
+				</node>
+				<node attribute="Uval" value="0.57">
+					<node attribute="pairs" value="17927.43">
+						<node attribute="log_pairs" value="9.13">
+							<node attribute="Favg" value="0.12">
+								<node attribute="H" value="11.48">
+									<node attribute="UqVal" value="1.02">
+										<node attribute="Target" value="0.00">
+										</node>
+										<node attribute="Target" value="0.40">
+										</node>
+									</node>
+									<node attribute="Target" value="1.00">
+									</node>
+								</node>
+								<node attribute="Target" value="1.00">
+								</node>
+							</node>
+							<node attribute="Uval" value="0.00">
+								<node attribute="Target" value="0.00">
+								</node>
+								<node attribute="log_pairs" value="10.56">
+									<node attribute="Target" value="1.00">
+									</node>
+									<node attribute="Target" value="0.67">
+									</node>
+								</node>
+							</node>
+						</node>
+						<node attribute="Favg" value="0.23">
+							<node attribute="UqVal" value="0.40">
+								<node attribute="Target" value="0.00">
+								</node>
+								<node attribute="Target" value="0.50">
+								</node>
+							</node>
+							<node attribute="Favg" value="25.00">
+								<node attribute="log_pairs" value="10.92">
+									<node attribute="Target" value="0.67">
+									</node>
+									<node attribute="Target" value="1.00">
+									</node>
+								</node>
+								<node attribute="Target" value="0.00">
+								</node>
+							</node>
+						</node>
+					</node>
+					<node attribute="Target" value="0.12">
+					</node>
+				</node>
+			</node>
+			<node attribute="Target" value="0.00">
+			</node>
+		</node>
+		<node attribute="Hmax" value="56.50">
+			<node attribute="UqVal" value="2.14">
+				<node attribute="Target" value="0.00">
+				</node>
+				<node attribute="Target" value="1.00">
+				</node>
+			</node>
+			<node attribute="Target" value="1.00">
+			</node>
+		</node>
+	</node>
+	<node attribute="Target" value="0.00">
+	</node>
+</node>

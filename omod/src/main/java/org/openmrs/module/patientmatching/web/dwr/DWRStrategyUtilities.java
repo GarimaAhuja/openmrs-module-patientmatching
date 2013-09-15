@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.lang.String;
+import java.lang.Integer;
 import java.util.Arrays;
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -17,6 +18,17 @@ import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpression;
+import javax.xml.xpath.XPathFactory;
+import java.util.*;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
+import org.w3c.dom.Element;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.directwebremoting.ServerContext;
@@ -25,7 +37,12 @@ import org.directwebremoting.proxy.dwr.Util;
 
 import org.openmrs.api.AdministrationService;
 import org.openmrs.api.context.Context;
-import org.openmrs.Person;
+import org.openmrs.api.PersonService;
+import org.openmrs.api.PatientService;
+import org.openmrs.api.impl.PersonServiceImpl;
+import org.openmrs.api.impl.PatientServiceImpl;
+import org.openmrs.PersonAttributeType;
+import org.openmrs.PatientIdentifierType;
 
 import org.openmrs.module.patientmatching.MatchingConstants;
 import org.openmrs.module.patientmatching.MatchingConfigurationUtils;
@@ -33,6 +50,11 @@ import org.openmrs.module.patientmatching.PatientMatchingConfiguration;
 import org.openmrs.module.patientmatching.ConfigurationEntry;
 
 import org.openmrs.module.patientmatching.db.hibernate.HibernateFieldMetadataDAO;
+
+import org.regenstrief.FieldMetrics.predictAdvice;
+import org.regenstrief.FieldMetrics.tree.Node;
+import org.regenstrief.FieldMetrics.FieldMetricsCalculation.FieldMetricsImplementation;
+import org.regenstrief.FieldMetrics.FieldMetricsCalculation.DataStructure.Field;
 
 /**
  * Utility class that will be available to the DWR javascript call from the
@@ -133,7 +155,8 @@ public class DWRStrategyUtilities {
 	public List<String> getDataForField(String fieldName)
 	{
 		HibernateFieldMetadataDAO hfm = new HibernateFieldMetadataDAO();
-		String tableName,columnName;
+		String tableName="";
+		String columnName="";
 		List<String> fieldData = new ArrayList<String>();
 		
 		StringTokenizer st = new StringTokenizer(fieldName,":");
@@ -142,8 +165,32 @@ public class DWRStrategyUtilities {
 		
 		if(tableName.equals("person_attribute_type")||tableName.equals("patient_identifier_type"))
 		{
+			String whereColumn="";
+			String whereValue="";
+			if(tableName.equals("person_attribute_type"))
+			{
+				PersonService ps = Context.getPersonService();
+				PersonAttributeType pat = new PersonAttributeType();
+				pat = ps.getPersonAttributeTypeByName(columnName);
+				int typeId = pat.getPersonAttributeTypeId();
+				whereColumn = "person_attribute_type_id";
+				whereValue = Integer.toString(typeId);
+				tableName = "person_attribute";
+				columnName = "value";
+			}
+			else
+			{
+				PatientService ps = Context.getPatientService();
+				PatientIdentifierType pit = new PatientIdentifierType();
+				pit = ps.getPatientIdentifierTypeByName(columnName);
+				int typeId = pit.getPatientIdentifierTypeId();
+				whereColumn = "identifier_type";
+				whereValue = Integer.toString(typeId);
+				tableName = "patient_identifier";
+				columnName = "identifier";
+			}
+			List fieldDataAsObjects=hfm.getFieldWhere(tableName,columnName,whereColumn,whereValue);
 
-			/*
 			for(int i=0;i<fieldDataAsObjects.size();i++)
 			{
 				String elem = new String();
@@ -156,7 +203,7 @@ public class DWRStrategyUtilities {
 					elem = "";
 				}
 				fieldData.add(elem);
-			}*/
+			}
 		}
 		else
 		{
@@ -177,5 +224,64 @@ public class DWRStrategyUtilities {
 		}
 
 		return fieldData;
+	}
+	public List<Field> getDataFromDatabase()
+	{
+		int i;
+		List<Field> fields =  new ArrayList<Field>();
+		
+		List<String> matchingFields = getAllMatchingFields();
+		for(i=0;i<matchingFields.size();i++)
+		{
+			Field newField = new Field();
+			newField.setFieldName(matchingFields.get(i));
+			newField.fieldData = new ArrayList<String>();
+			newField.fieldData = getDataForField(matchingFields.get(i));
+			fields.add(newField);
+		}
+		return fields;
+	}
+
+	public List<String> getAllSuggestedFields() 
+	{
+		List<String> suggestedFields = new ArrayList<String>();
+		
+		Node[] root = new Node[10];
+		List<Field> fields;
+		int i,j;
+		int target;
+
+		//getting DecisionTrees
+		for(i=0;i<10;i++)
+		{
+			root[i]=predictAdvice.getDecisionTree("./RandomForest/tree"+Integer.toString(i+1)+".xml");
+		}
+
+		//getting field data from database
+		fields=getDataFromDatabase();
+
+		//calculating field metrics
+		predictAdvice.calculateFieldMetrics(fields);
+		
+		//using field metrics and the decision tree to know whether a particular attribute is good for patient matching
+		for(i=0;i<fields.size();i++)
+		{
+			//target >= 5 if field is good for matching
+			target=0;
+			for(j=0;j<10;j++)
+			{
+				target+=predictAdvice.decideTarget(root[j],fields.get(i));
+			}
+			if(target>=5)
+			{
+				fields.get(i).setTarget(1);
+				suggestedFields.add(fields.get(i).getFieldName());
+			}
+			else
+			{
+				fields.get(i).setTarget(0);
+			}
+		}
+		return suggestedFields;
 	}
 }

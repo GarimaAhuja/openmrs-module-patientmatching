@@ -1,0 +1,74 @@
+<node attribute="UqVal" value="0.96">
+	<node attribute="H" value="1.68">
+		<node attribute="H" value="0.98">
+			<node attribute="Uval" value="1.00">
+				<node attribute="UqVal" value="0.02">
+					<node attribute="Target" value="0.00">
+					</node>
+					<node attribute="Target" value="0.11">
+					</node>
+				</node>
+				<node attribute="Target" value="0.22">
+				</node>
+			</node>
+			<node attribute="Favg" value="25.00">
+				<node attribute="Target" value="0.00">
+				</node>
+				<node attribute="Target" value="0.80">
+				</node>
+			</node>
+		</node>
+		<node attribute="Uval" value="0.02">
+			<node attribute="pairs" value="2901.60">
+				<node attribute="Target" value="0.80">
+				</node>
+				<node attribute="Target" value="1.00">
+				</node>
+			</node>
+			<node attribute="log_pairs" value="8.66">
+				<node attribute="Target" value="1.00">
+				</node>
+				<node attribute="UqVal" value="0.00">
+					<node attribute="Target" value="1.00">
+					</node>
+					<node attribute="log_pairs" value="10.92">
+						<node attribute="Target" value="0.33">
+						</node>
+						<node attribute="Target" value="0.00">
+						</node>
+					</node>
+				</node>
+			</node>
+		</node>
+	</node>
+	<node attribute="UqVal" value="77.38">
+		<node attribute="H" value="1.21">
+			<node attribute="Target" value="0.00">
+			</node>
+			<node attribute="UqVal" value="26.85">
+				<node attribute="UqVal" value="1.02">
+					<node attribute="Target" value="0.00">
+					</node>
+					<node attribute="UqVal" value="2.52">
+						<node attribute="Target" value="0.83">
+						</node>
+						<node attribute="Target" value="1.00">
+						</node>
+					</node>
+				</node>
+				<node attribute="Hmax" value="85.14">
+					<node attribute="Target" value="0.50">
+					</node>
+					<node attribute="Target" value="0.88">
+					</node>
+				</node>
+			</node>
+		</node>
+		<node attribute="UqVal" value="83.13">
+			<node attribute="Target" value="1.00">
+			</node>
+			<node attribute="Target" value="0.00">
+			</node>
+		</node>
+	</node>
+</node>

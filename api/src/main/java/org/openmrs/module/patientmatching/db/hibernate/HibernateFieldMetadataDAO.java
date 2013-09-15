@@ -33,4 +33,15 @@ public class HibernateFieldMetadataDAO{
 		session.close();
 		return result;
 	}
+	public java.util.List getFieldWhere(String tableName, String columnName, String whereColumn, String whereValue)
+	{
+		HibernateConnection hc = new HibernateConnection();
+		sessionFactory = hc.getSessionFactory();
+		Session session = sessionFactory.openSession();
+		Query query = session.createSQLQuery("select "+columnName+" from "+tableName+" where "+whereColumn+"="+whereValue);
+		List result = query.list();
+		session.close();
+		return result;
+	}
+
 }

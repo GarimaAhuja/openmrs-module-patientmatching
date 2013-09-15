@@ -1,0 +1,46 @@
+<node attribute="Hmax" value="40.07">
+	<node attribute="H" value="5.62">
+		<node attribute="UqVal" value="0.96">
+			<node attribute="Target" value="0.00">
+			</node>
+			<node attribute="Target" value="0.40">
+			</node>
+		</node>
+		<node attribute="Target" value="1.00">
+		</node>
+	</node>
+	<node attribute="Hmax" value="98.95">
+		<node attribute="log_pairs" value="7.07">
+			<node attribute="Target" value="1.00">
+			</node>
+			<node attribute="pairs" value="1964.17">
+				<node attribute="H" value="11.48">
+					<node attribute="Target" value="0.11">
+					</node>
+					<node attribute="Target" value="1.00">
+					</node>
+				</node>
+				<node attribute="N" value="15.90">
+					<node attribute="Hmax" value="62.66">
+						<node attribute="Target" value="0.29">
+						</node>
+						<node attribute="pairs" value="37388.21">
+							<node attribute="Target" value="1.00">
+							</node>
+							<node attribute="Target" value="0.60">
+							</node>
+						</node>
+					</node>
+					<node attribute="Target" value="1.00">
+					</node>
+				</node>
+			</node>
+		</node>
+		<node attribute="Uval" value="0.00">
+			<node attribute="Target" value="0.00">
+			</node>
+			<node attribute="Target" value="1.00">
+			</node>
+		</node>
+	</node>
+</node>

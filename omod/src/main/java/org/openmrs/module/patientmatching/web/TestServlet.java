@@ -13,22 +13,11 @@ import org.apache.commons.logging.LogFactory;
 
 import org.openmrs.module.patientmatching.db.hibernate.HibernateFieldMetadataDAO;
 
-import org.openmrs.api.AdministrationService;
-import org.openmrs.api.context.Context;
-
-import java.lang.String;
 import java.util.List;
-import java.util.Arrays;
-import java.util.ArrayList;
-import java.util.SortedSet;
-import java.util.TreeSet;
-import java.util.HashMap;
 
-import org.openmrs.module.patientmatching.MatchingConstants;
-import org.openmrs.module.patientmatching.MatchingConfigurationUtils;
-import org.openmrs.module.patientmatching.PatientMatchingConfiguration;
-import org.openmrs.module.patientmatching.ConfigurationEntry;
 import org.openmrs.module.patientmatching.web.dwr.DWRStrategyUtilities;
+
+import org.regenstrief.FieldMetrics.FieldMetricsCalculation.DataStructure.Field;
 
 public class TestServlet extends HttpServlet {
 
@@ -41,20 +30,14 @@ public class TestServlet extends HttpServlet {
 		// Set response content type
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
-
-		//To get an entire column
+		
 		DWRStrategyUtilities dsu = new DWRStrategyUtilities();
-		List<String> fieldNames = dsu.getAllMatchingFields();
+		
+		List<String> fieldNames = dsu.getAllSuggestedFields();
 		for(int j=0;j<fieldNames.size();j++)
 		{
-			//out.println("<h4>"+ fieldNames.get(j) +"<h4>");
-			List fieldData = dsu.getDataForField(fieldNames.get(j));
-			//for(int i=0;i<fieldData.size();i++)
-				//out.println("<p>"+fieldData.get(i)+"</p>");
+			out.println("<h4>"+ fieldNames.get(j) +"</h4>");
 		}
-		List fieldData = dsu.getDataForField("person_attribute:value");
-			for(int i=0;i<fieldData.size();i++)
-				out.println("<p>"+fieldData.get(i)+"</p>");
 	}
 
 
