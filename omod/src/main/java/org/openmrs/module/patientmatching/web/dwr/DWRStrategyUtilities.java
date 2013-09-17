@@ -70,13 +70,10 @@ public class DWRStrategyUtilities {
 	 */
 	public DWRStrategyUtilities() {
 	}
-
-	/**
-	  * get all possible fields for patient matching in the "tableName:columnName" format
-	  */
-	public List<String> getAllMatchingFields() {
-		//create fieldName to tablename+columname map
-		HashMap<String, String> fieldNameToSchemaName = new HashMap<String, String>();
+	
+	
+	public HashMap<String,String> getMap() {
+		HashMap<String, String> fieldNameToSchemaName = new HashMap<String, String>(); 
 		fieldNameToSchemaName.put("(Attribute) Birthplace","person_attribute_type:Birthplace");
 		fieldNameToSchemaName.put("(Attribute) Citizenship","person_attribute_type:Citizenship");
 		fieldNameToSchemaName.put("(Attribute) Civil Status","person_attribute_type:Civil Status");
@@ -124,6 +121,67 @@ public class DWRStrategyUtilities {
 		fieldNameToSchemaName.put("org.openmrs.PersonName.middleName","person_name:middle_name");
 		fieldNameToSchemaName.put("org.openmrs.PersonName.personNameId","person_name:person_name_id");
 		fieldNameToSchemaName.put("org.openmrs.PersonName.preferred","person_name:preferred");
+
+		return fieldNameToSchemaName;
+	}
+	
+	public HashMap<String,String> getInverseMap() {
+		HashMap<String, String> schemaNameToFieldName = new HashMap<String, String>(); 
+		schemaNameToFieldName.put("person_attribute_type:Birthplace","(Attribute) Birthplace");
+		schemaNameToFieldName.put("person_attribute_type:Citizenship","(Attribute) Citizenship");
+		schemaNameToFieldName.put("person_attribute_type:Civil Status","(Attribute) Civil Status");
+		schemaNameToFieldName.put("person_attribute_type:Health Center","(Attribute) Health Center");
+		schemaNameToFieldName.put("person_attribute_type:Health District","(Attribute) Health District");
+		schemaNameToFieldName.put("person_attribute_type:Mother's Name","(Attribute) Mother's Name");
+		schemaNameToFieldName.put("person_attribute_type:Race","(Attribute) Race");
+		schemaNameToFieldName.put("patient_identifier_type:Old Identification Number","(Identifier) Old Identification Number");
+		schemaNameToFieldName.put("patient_identifier_type:OpenMRS Identification Number","(Identifier) OpenMRS Identification Number");
+		schemaNameToFieldName.put("person:birthdate","org.openmrs.Patient.birthdate");
+		schemaNameToFieldName.put("person:birthdate_estimated","org.openmrs.Patient.birthdateEstimated");
+		schemaNameToFieldName.put("person:dead","org.openmrs.Patient.dead");
+		schemaNameToFieldName.put("person:death_date","org.openmrs.Patient.deathDate");
+		schemaNameToFieldName.put("person:gender","org.openmrs.Patient.gender");
+		schemaNameToFieldName.put("patient:patient_id","org.openmrs.Patient.patientId");
+		schemaNameToFieldName.put("person:person_id","org.openmrs.Patient.personId");
+		schemaNameToFieldName.put("person:uuid","org.openmrs.Patient.uuid");
+		schemaNameToFieldName.put("person_address:address1","org.openmrs.PersonAddress.address1");
+		schemaNameToFieldName.put("person_address:address2","org.openmrs.PersonAddress.address2");
+		schemaNameToFieldName.put("person_address:address3","org.openmrs.PersonAddress.address3");
+		schemaNameToFieldName.put("person_address:address4","org.openmrs.PersonAddress.address4");
+		schemaNameToFieldName.put("person_address:address5","org.openmrs.PersonAddress.address5");
+		schemaNameToFieldName.put("person_address:address6","org.openmrs.PersonAddress.address6");
+		schemaNameToFieldName.put("person_address:city_village","org.openmrs.PersonAddress.cityVillage");
+		schemaNameToFieldName.put("person_address:country","org.openmrs.PersonAddress.country");
+		schemaNameToFieldName.put("person_address:county_district","org.openmrs.PersonAddress.countyDistrict");
+		schemaNameToFieldName.put("person_address:end_date","org.openmrs.PersonAddress.endDate");
+		schemaNameToFieldName.put("person_address:latitude","org.openmrs.PersonAddress.latitude");
+		schemaNameToFieldName.put("person_address:longitude","org.openmrs.PersonAddress.longitude");
+		schemaNameToFieldName.put("person_address:person_address_id","org.openmrs.PersonAddress.personAddressId");
+		schemaNameToFieldName.put("person_address:postal_code","org.openmrs.PersonAddress.postalCode");
+		schemaNameToFieldName.put("person_address:preferred","org.openmrs.PersonAddress.preferred");
+		schemaNameToFieldName.put("person_address:start_date","org.openmrs.PersonAddress.startDate");
+		schemaNameToFieldName.put("person_address:state_province","org.openmrs.PersonAddress.stateProvince");
+		schemaNameToFieldName.put("person_address:uuid","org.openmrs.PersonAddress.uuid");
+		schemaNameToFieldName.put("person_name:degree","org.openmrs.PersonName.degree");
+		schemaNameToFieldName.put("person_name:family_name","org.openmrs.PersonName.familyName");
+		schemaNameToFieldName.put("person_name:family_name2","org.openmrs.PersonName.familyName2");
+		schemaNameToFieldName.put("person_name:family_name_prefix","org.openmrs.PersonName.familyNamePrefix");
+		schemaNameToFieldName.put("person_name:family_name_suffix","org.openmrs.PersonName.familyNameSuffix");
+		schemaNameToFieldName.put("person_name:given_name","org.openmrs.PersonName.givenName");
+		schemaNameToFieldName.put("person_name:middle_name","org.openmrs.PersonName.middleName");
+		schemaNameToFieldName.put("person_name:person_name_id","org.openmrs.PersonName.personNameId");
+		schemaNameToFieldName.put("person_name:preferred","org.openmrs.PersonName.preferred");
+	
+		return schemaNameToFieldName;
+	}
+
+	/**
+	  * get all possible fields for patient matching in the "tableName:columnName" format
+	  */
+	public List<String> getAllMatchingFields() {
+		//create fieldName to tablename+columname map
+		HashMap<String, String> fieldNameToSchemaName = new HashMap<String,String>(); 
+		fieldNameToSchemaName = getMap();
 
 
 		//To get excluded properties
@@ -273,7 +331,7 @@ public class DWRStrategyUtilities {
 			{
 				target+=predictAdvice.decideTarget(root[j],fields.get(i));
 			}
-			if(target>=3)
+			if(target>=5)
 			{
 				fields.get(i).setTarget(1);
 				suggestedFields.add(fields.get(i).getFieldName());
@@ -283,6 +341,20 @@ public class DWRStrategyUtilities {
 				fields.get(i).setTarget(0);
 			}
 		}
-		return suggestedFields;
+		
+		HashMap<String, String> schemaNameToFieldName = new HashMap<String,String>(); 
+		schemaNameToFieldName = getInverseMap();
+		
+		List<String> suggestedFieldsInFormat = new ArrayList<String>();
+		
+		for(i=0;i<suggestedFields.size();i++)
+		{
+			if(schemaNameToFieldName.containsKey(suggestedFields.get(i)))
+			{
+				suggestedFieldsInFormat.add(schemaNameToFieldName.get(suggestedFields.get(i)));
+			}
+		}
+		
+		return suggestedFieldsInFormat;
 	}
 }

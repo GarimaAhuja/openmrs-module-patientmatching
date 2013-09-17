@@ -41,9 +41,18 @@
 		</property>
 	</bean>
 	
-	<bean id="strategyForm"	class="@MODULE_PACKAGE@.web.StrategyFormController">
+	<bean id="strategyForm"	class="@MODULE_PACKAGE@.web.ConfigurationSimpleFormController">
+		<property name="commandName">
+			<value>patientMatchingConfiguration</value>
+		</property>
+		<property name="commandClass">
+			<value>@MODULE_PACKAGE@.PatientMatchingConfiguration</value>
+		</property>
 		<property name="formView">
 			<value>/module/@MODULE_ID@/strategyForm</value>
+		</property>
+		<property name="successView">
+			<value>redirect:/module/@MODULE_ID@/config.list</value>
 		</property>
 	</bean>
 
