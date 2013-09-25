@@ -343,7 +343,7 @@ public class DWRStrategyUtilities implements Runnable {
 			{
 				target+=predictAdvice.decideTarget(root[j],fields.get(i));
 			}
-			if(target>=3)
+			if(target>=5)
 			{
 				fields.get(i).setTarget(1);
 				suggestedFields.add(fields.get(i).getFieldName());
