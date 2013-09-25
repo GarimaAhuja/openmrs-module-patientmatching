@@ -56,14 +56,19 @@ import org.regenstrief.FieldMetrics.tree.Node;
 import org.regenstrief.FieldMetrics.FieldMetricsCalculation.FieldMetricsImplementation;
 import org.regenstrief.FieldMetrics.FieldMetricsCalculation.DataStructure.Field;
 
+import java.lang.Runnable;
+import java.lang.Thread;
+
+
 /**
  * Utility class that will be available to the DWR javascript call from the
  * module web page. All methods in this class must be registered in module
  * config file to make it available as javascript call.
  */
-public class DWRStrategyUtilities {
+public class DWRStrategyUtilities implements Runnable {
 
 	protected final Log log = LogFactory.getLog(getClass());
+	private List<String> suggestedFieldsInFormat = new ArrayList<String>();
 
 	/**
 	 * Constructor
@@ -302,6 +307,13 @@ public class DWRStrategyUtilities {
 
 	public List<String> getAllSuggestedFields() 
 	{
+		startThread();
+		
+		return suggestedFieldsInFormat;
+	}
+
+	public void run() 
+	{
 		List<String> suggestedFields = new ArrayList<String>();
 		
 		Node[] root = new Node[10];
@@ -331,7 +343,7 @@ public class DWRStrategyUtilities {
 			{
 				target+=predictAdvice.decideTarget(root[j],fields.get(i));
 			}
-			if(target>=5)
+			if(target>=3)
 			{
 				fields.get(i).setTarget(1);
 				suggestedFields.add(fields.get(i).getFieldName());
@@ -345,7 +357,6 @@ public class DWRStrategyUtilities {
 		HashMap<String, String> schemaNameToFieldName = new HashMap<String,String>(); 
 		schemaNameToFieldName = getInverseMap();
 		
-		List<String> suggestedFieldsInFormat = new ArrayList<String>();
 		
 		for(i=0;i<suggestedFields.size();i++)
 		{
@@ -354,7 +365,11 @@ public class DWRStrategyUtilities {
 				suggestedFieldsInFormat.add(schemaNameToFieldName.get(suggestedFields.get(i)));
 			}
 		}
-		
-		return suggestedFieldsInFormat;
 	}
+	public void startThread()
+	{
+		Thread aThread = new Thread(this);
+		aThread.run();
+	}
+
 }
