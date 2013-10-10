@@ -125,7 +125,9 @@ public class FieldMetricsImplementation
 	  **/
 	public static double calculateAverageFrequency(int totalRecords,int UqVal)
 	{
-		double Favg = totalRecords/UqVal;
+		double Favg = 0;
+		if(UqVal!=0)
+			Favg = totalRecords/UqVal;
 		return Favg;
 	}
 
